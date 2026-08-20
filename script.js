@@ -7,7 +7,7 @@ let mouse = { x: innerWidth / 2, y: innerHeight / 2 };
 let started = false;
 let lastSplit = 0;
 const splitEvery = 1000 / 10;
-const maxBranches = 20000;
+const maxBranches = 200000;
 
 function resize() {
   const dpr = devicePixelRatio || 1;
