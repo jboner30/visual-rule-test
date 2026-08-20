@@ -30,10 +30,8 @@ function addInitialLine(x, y) {
   });
 }
 
-function aimFrom(x, y, fallbackAngle) {
-  const target = Math.atan2(mouse.y - y, mouse.x - x);
-  const pull = 0.72;
-  return target * pull + fallbackAngle * (1 - pull) + (Math.random() - .5) * 0.9;
+function aimFrom(x, y) {
+  return Math.atan2(mouse.y - y, mouse.x - x);
 }
 
 function splitBranch(branch) {
@@ -42,7 +40,7 @@ function splitBranch(branch) {
   const baseAngle = Math.atan2(dy, dx);
   const length = Math.max(9, Math.hypot(dx, dy) * (0.72 + Math.random() * .25));
   const makeChild = (x, y, outward) => {
-    const a = aimFrom(x, y, baseAngle + outward * Math.PI);
+    const a = aimFrom(x, y);
     return {
       x1: x, y1: y,
       x2: x + Math.cos(a) * length,
