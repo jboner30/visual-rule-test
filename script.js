@@ -38,18 +38,25 @@ function splitBranch(branch) {
   const dx = branch.x2 - branch.x1;
   const dy = branch.y2 - branch.y1;
   const baseAngle = Math.atan2(dy, dx);
-  const length = Math.max(9, Math.hypot(dx, dy) * (0.72 + Math.random() * .25));
+  const length = Math.max(9, Math.hypot(dx, dy) * (0.72 + Math.random() * 0.25));
+
   const makeChild = (x, y, outward) => {
-    const a = aimFrom(x, y);
+    const angle = aimFrom(x, y);
+
     return {
-      x1: x, y1: y,
-      x2: x + Math.cos(a) * length,
-      y2: y + Math.sin(a) * length,
-      hue: branch.hue + (Math.random() - .5) * 12,
-      width: Math.max(.35, branch.width * .92)
+      x1: x,
+      y1: y,
+      x2: x + Math.cos(angle) * length,
+      y2: y + Math.sin(angle) * length,
+      hue: branch.hue + (Math.random() - 0.5) * 12,
+      width: Math.max(0.35, branch.width * 0.92)
     };
   };
-  return [makeChild(branch.x1, branch.y1, -1), makeChild(branch.x2, branch.y2, 1)];
+
+  return [
+    makeChild(branch.x1, branch.y1, -1),
+    makeChild(branch.x2, branch.y2, 1)
+  ];
 }
 
 function draw() {
