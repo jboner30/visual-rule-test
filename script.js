@@ -1,6 +1,8 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const hint = document.querySelector('.hint');
+const titleScreen = document.getElementById('title-screen');
+const startButton = document.getElementById('start-button');
 
 let branches = [];
 let mouse = { x: innerWidth / 2, y: innerHeight / 2 };
@@ -8,6 +10,15 @@ let started = false;
 let lastSplit = 0;
 const splitEvery = 1000 / 10;
 const maxBranches = 12000;
+
+function begin() {
+  if (started) return;
+
+  started = true;
+  lastSplit = performance.now();
+  titleScreen.classList.add('hidden');
+  hint.style.opacity = 1;
+}
 
 function resize() {
   const dpr = devicePixelRatio || 1;
@@ -87,14 +98,12 @@ addEventListener('pointermove', e => { mouse.x = e.clientX; mouse.y = e.clientY;
 addEventListener('pointerdown', e => {
   mouse.x = e.clientX;
   mouse.y = e.clientY;
-  if (!started) {
-    started = true;
-    lastSplit = performance.now();
-    hint.style.opacity = 0;
-  }
+
+  begin();
   addInitialLine(e.clientX, e.clientY);
   draw();
 });
+startButton.addEventListener('click', begin);
 addEventListener('resize', resize);
 resize();
 requestAnimationFrame(tick);
