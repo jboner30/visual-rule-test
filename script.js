@@ -71,7 +71,8 @@ function splitBranch(branch) {
 }
 
 function draw() {
-  ctx.clearRect(0, 0, innerWidth, innerHeight);
+  ctx.fillStyle = 'rgba(7, 17, 31, 0.20)';
+  ctx.fillRect(0, 0, innerWidth, innerHeight);
   ctx.lineCap = 'round';
   for (const b of branches) {
     ctx.beginPath();
@@ -82,6 +83,13 @@ function draw() {
     ctx.stroke();
   }
 }
+
+function animate() {
+  draw();
+  requestAnimationFrame(animate);
+}
+
+animate();
 
 function tick(now) {
   if (started && now - lastSplit >= splitEvery) {
