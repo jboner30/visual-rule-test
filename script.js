@@ -9,7 +9,7 @@ let mouse = { x: innerWidth / 2, y: innerHeight / 2 };
 let started = false;
 let lastSplit = 0;
 const splitEvery = 1000 / 10;
-const maxBranches = 12000;
+const maxBranches = 20000;
 
 function begin() {
   if (started) return;
